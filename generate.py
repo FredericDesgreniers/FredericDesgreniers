@@ -70,7 +70,7 @@ def generate_progress_bar(progress: int, max: int = 61, step: int = 10, top_bar:
         progress_bar += " "
     progress_bar += " "
     for _ in range(progress - 1):
-        progress_bar += 'O'
+        progress_bar += '⊞'
     for _ in range(max - progress):
         progress_bar += ' '
     progress_bar += "|\n\n"
