@@ -1,8 +1,8 @@
 import calendar
-from datetime import date
+from datetime import date, datetime
 
 
-def generate_calendar(year, month, day):
+def generate_calendar(year: int, month: int, day: int):
     cal = calendar.Calendar(6)
     content = "``" + calendar.month_name[month] + " - " + str(year) + "``\n\n``"
 
@@ -27,12 +27,40 @@ def generate_calendar(year, month, day):
             content += " "
     return content + '``'
 
+def generate_time_bar(minutes: int):
+    content = "\n\n``/0‾‾‾‾‾‾‾‾‾10‾‾‾‾‾‾‾‾20‾‾‾‾‾‾‾‾30‾‾‾‾‾‾‾‾40‾‾‾‾‾‾‾‾50‾‾‾‾‾‾‾60‾\\ ``\n\n"
+    content += "``| "
+    for _ in range(int(minutes)):
+        content += 'O'
+    content += "``\n\n"
+    content += "``\\0_________10________20________30________40________50_______60_/``"
+    return content
+
+def join_blocks(left: str, right: str, left_width: int):
+    left_lines = left.split('\n\n')
+    right_lines = right.split('\n\n')
+
+    content = ""
+    for i, line in enumerate(left_lines):
+        line += " `` "
+        while len(line) < left_width:
+            line += ' '
+        line += "`` "
+        content += line
+        if len(right_lines) > i:
+            content += " " + right_lines[i] + "\n\n"
+        else:
+            content += "\n\n"
+    return content
 
 if __name__ == '__main__':
     today = date.today()
     generated_calendar = generate_calendar(today.year, today.month, today.day)
     print(generated_calendar)
 
+    content = join_blocks(generated_calendar, generate_time_bar(datetime.now().minute), left_width=30)
+    print(content)
+
     f = open("README.md", "w", encoding="utf-8")
-    f.write(generated_calendar)
+    f.write(content)
     f.close()
