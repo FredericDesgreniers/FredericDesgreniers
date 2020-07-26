@@ -28,17 +28,35 @@ def generate_calendar(year: int, month: int, day: int):
     return content
 
 
-def generate_time_bar(minutes: int):
-    content = "\n\n/0‾‾‾‾‾‾‾‾‾10‾‾‾‾‾‾‾‾20‾‾‾‾‾‾‾‾30‾‾‾‾‾‾‾‾40‾‾‾‾‾‾‾‾50‾‾‾‾‾‾‾60‾\\\n\n"
+def generate_bar(c: str = '‾', max: int = 61, step: int = 10):
+    bar = ""
+    current = 0
+    until_step = 0
+    while current < max:
+        if until_step == 0:
+            bar += str(current)
+            current += 1
+            until_step = step - 1
+        else:
+            bar += c
+        until_step -= 1
+        current += 1
+    return bar
+
+
+def generate_progress_bar(progress: int, max: int = 61, step: int = 10):
+    content = "/" + generate_bar(max=max, step=step) + "\\ \n\n"
     content += "| "
-    for _ in range(int(minutes)):
+    for _ in range(progress):
         content += 'O'
-    content += "\n\n"
-    content += "\\0_________10________20________30________40________50_______60_/"
+    for _ in range(max-progress):
+        content += ' '
+    content += "  |\n\n"
+    content += "\\" + generate_bar(c="_", max=max, step=step) + "/\n\n"
     return content
 
 
-def join_blocks(left: str, right: str, delimiter = " | "):
+def join_blocks(left: str, right: str, delimiter=" | "):
     left_width = max([len(x) for x in left.split("\n\n")])
     left_lines = left.split('\n\n')
     right_lines = right.split('\n\n')
@@ -52,7 +70,16 @@ def join_blocks(left: str, right: str, delimiter = " | "):
             content += delimiter + right_lines[i] + "\n\n"
         else:
             content += "\n\n"
+    if len(left_lines) < len(right_lines):
+        padding = ''
+        for _ in range(left_width):
+            padding += ' '
+        for i, line in enumerate(right_lines):
+            if i >= len(left_lines):
+                content += padding + delimiter + line + "\n\n"
+
     return content
+
 
 def wrap_in_ticks(content: str):
     new_content = ""
@@ -66,7 +93,11 @@ if __name__ == '__main__':
     generated_calendar = generate_calendar(today.year, today.month, today.day)
     print(generated_calendar)
 
-    content = wrap_in_ticks(join_blocks(generated_calendar, generate_time_bar(datetime.now().minute)))
+    content = wrap_in_ticks(join_blocks(generated_calendar,
+                                        "hour\n\n" + generate_progress_bar(datetime.now().hour, max=25, step=6)
+                                        +"\n\nminute\n\n" + generate_progress_bar(datetime.now().minute)
+                                        )
+                            )
     print(content)
 
     f = open("README.md", "w", encoding="utf-8")
