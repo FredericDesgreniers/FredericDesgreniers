@@ -98,7 +98,7 @@ def renderBook(title: str, link: str, description) -> str:
 
 
 def book_list():
-    return "<b>Book List</b> (Some of my favorite books read in the last 2-3 years)\n\n" + \
+    return "<b>Book List</b> (Some of my favorite books read in the last 2-3 years) <b><a href=\"https://github.com/FredericDesgreniers/FredericDesgreniers/issues/new?labels=book&title=[book%20name%20goes%20here]&body=[Any%20related%20comment%20goes%20here]\">Send me a book suggestion!</a></b>\n\n" + \
            renderBook("The Spy And The Traitor", "https://www.goodreads.com/book/show/37542581-the-spy-and-the-traitor",
                       "Story of Oleg Gordievsky, a real soviet era spy turned double agent for MI6.") + \
            renderBook("Manufacturing Consent", "https://www.goodreads.com/book/show/12617.Manufacturing_Consent",
@@ -123,10 +123,7 @@ def book_list():
 
 
 def wrap_in_ticks(content: str):
-    new_content = ""
-    for line in content.split("\n\n"):
-        new_content += '``' + line + '``\n\n'
-    return '<pre>\n\n' + content + '\n\n</pre>'
+     return '<pre>' + content + '</pre>'
 
 
 if __name__ == '__main__':
@@ -144,9 +141,8 @@ if __name__ == '__main__':
                                                                          ) +
                                                              "------------------------------------------------------\n\n" +
 
-                                                             "<b><a href=\"https://github.com/FredericDesgreniers/FredericDesgreniers/issues/new?labels=book&title=[book%20name%20goes%20here]&body=[Any%20related%20comment%20goes%20here]\">Send me a book suggestion!</a></b>\n\n\n\n" +
                                                              book_list()
-                                                             )
+    )
     print(content)
 
     f = open("README.md", "w", encoding="utf-8")
