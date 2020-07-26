@@ -100,7 +100,7 @@ if __name__ == '__main__':
 
     content = wrap_in_ticks(join_blocks(generated_calendar,
                                         generate_progress_bar(datetime.now().hour, max=25, step=6, bottom_bar=False)
-                                        + generate_progress_bar(50, top_bar=False)
+                                        + generate_progress_bar(datetime.now().minute, top_bar=False)
                                         )
                             )
     print(content)
