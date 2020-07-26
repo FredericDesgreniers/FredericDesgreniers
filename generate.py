@@ -4,7 +4,8 @@ import sys
 
 def generate_calendar(year: int, month: int, day: int):
     cal = calendar.Calendar(6)
-    calendar_format = "CALENDAR\n\n-----------------------------\n\n" + calendar.month_name[month] + " - " + str(year) + "\n\n"
+    calendar_format = "CALENDAR\n\n_____________________________\n\n" + calendar.month_name[month] + " - " + str(year) \
+                      + "\n\n SU  MO  TU  WE  TH  FR  SA\n\n"
 
     current_week = 0
     for row in cal.itermonthdates(year, month):
@@ -90,7 +91,7 @@ def wrap_in_ticks(content: str):
     new_content = ""
     for line in content.split("\n\n"):
         new_content += '``' + line + '``\n\n'
-    return new_content
+    return '```\n\n'+content+'\n\n```'
 
 if __name__ == '__main__':
     today = date.today()
@@ -98,7 +99,7 @@ if __name__ == '__main__':
     print(generated_calendar)
 
     content = "**Frederic Desgreniers**\n\n" + wrap_in_ticks(join_blocks(generated_calendar,
-                                        "CLOCK (UTC)\n\n-------------------------------\n\n"
+                                        "CLOCK (UTC)\n\n_______________________________\n\n"
                                         + generate_progress_bar(datetime.now().hour, max=25, step=6, bottom_bar=False)
                                         + generate_progress_bar(datetime.now().minute, top_bar=False)
                                         )
