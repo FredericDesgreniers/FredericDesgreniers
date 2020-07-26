@@ -17,14 +17,14 @@ def generate_calendar(year, month, day):
         if is_today:
             content += "["
         else:
-            content += " "
+            content += " "
         if row.day < 10:
-            content += " "
+            content += " "
         content += str(row.day)
         if is_today:
             content += "]"
         else:
-            content += " "
+            content += " "
     return content + '``'
 
 
