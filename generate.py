@@ -1,11 +1,11 @@
 import calendar
 from datetime import date, datetime
-import sys
+
 
 def generate_calendar(year: int, month: int, day: int):
     cal = calendar.Calendar(6)
     calendar_format = "CALENDAR\n\n_____________________________\n\n" + calendar.month_name[month] + " - " + str(year) \
-                      + "\n\n SU  MO  TU  WE  TH  FR  SA\n\n"
+                      + "\n\n<b> SU  MO  TU  WE  TH  FR  SA</b>\n\n"
 
     current_week = 0
     for row in cal.itermonthdates(year, month):
@@ -16,14 +16,14 @@ def generate_calendar(year: int, month: int, day: int):
                 calendar_format += "\n\n"
         is_today = row.month == month and row.day == day
         if is_today:
-            calendar_format += "["
+            calendar_format += "<b>["
         else:
             calendar_format += " "
         if row.day < 10:
             calendar_format += " "
         calendar_format += str(row.day)
         if is_today:
-            calendar_format += "]"
+            calendar_format += "]</b>"
         else:
             calendar_format += " "
     return calendar_format
@@ -61,15 +61,17 @@ def generate_progress_bar(progress: int, max: int = 61, step: int = 10, top_bar:
         progress_bar += "\\" + generate_bar(c="_", max=max, step=step) + "/\n\n"
     return progress_bar
 
+def hlen(s: str) -> int:
+    return len(s.replace("<b>", "").replace("</b>", ""))
 
 def join_blocks(left: str, right: str, delimiter="  |  "):
-    left_width = max([len(x) for x in left.split("\n\n")])
+    left_width = max([hlen(x) for x in left.split("\n\n")])
     left_lines = left.split('\n\n')
     right_lines = right.split('\n\n')
 
     block = ""
     for i, line in enumerate(left_lines):
-        while len(line) < left_width:
+        while hlen(line) < left_width:
             line += " "
         block += line
         if len(right_lines) > i:
@@ -91,7 +93,8 @@ def wrap_in_ticks(content: str):
     new_content = ""
     for line in content.split("\n\n"):
         new_content += '``' + line + '``\n\n'
-    return '```\n\n'+content+'\n\n```'
+    return '<pre>\n\n' + content + '\n\n</pre>'
+
 
 if __name__ == '__main__':
     today = date.today()
@@ -99,11 +102,14 @@ if __name__ == '__main__':
     print(generated_calendar)
 
     content = "**Frederic Desgreniers**\n\n" + wrap_in_ticks(join_blocks(generated_calendar,
-                                        "CLOCK (UTC)\n\n_______________________________\n\n"
-                                        + generate_progress_bar(datetime.now().hour, max=25, step=6, bottom_bar=False)
-                                        + generate_progress_bar(datetime.now().minute, top_bar=False)
-                                        )
-                            )
+                                                                         "CLOCK (UTC)\n\n_______________________________\n\n"
+                                                                         + generate_progress_bar(datetime.now().hour,
+                                                                                                 max=25, step=6,
+                                                                                                 bottom_bar=False)
+                                                                         + generate_progress_bar(datetime.now().minute,
+                                                                                                 top_bar=False)
+                                                                         )
+                                                             )
     print(content)
 
     f = open("README.md", "w", encoding="utf-8")
