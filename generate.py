@@ -35,6 +35,8 @@ def generate_bar(c: str = '‾', max: int = 61, step: int = 10):
     while current < max:
         if until_step == 0:
             bar += str(current)
+            if current < 10:
+                bar += c
             current += 1
             until_step = step - 1
         else:
@@ -46,7 +48,7 @@ def generate_bar(c: str = '‾', max: int = 61, step: int = 10):
 
 def generate_progress_bar(progress: int, max: int = 61, step: int = 10):
     content = "/" + generate_bar(max=max, step=step) + "\\ \n\n"
-    content += "|"
+    content += "| "
     for _ in range(progress):
         content += 'O'
     for _ in range(max-progress):
@@ -95,7 +97,7 @@ if __name__ == '__main__':
 
     content = wrap_in_ticks(join_blocks(generated_calendar,
                                         "hour\n\n" + generate_progress_bar(datetime.now().hour, max=25, step=6)
-                                        +"\n\nminute\n\n" + generate_progress_bar(datetime.now().minute)
+                                        +"\n\nminute\n\n" + generate_progress_bar(50)
                                         )
                             )
     print(content)
