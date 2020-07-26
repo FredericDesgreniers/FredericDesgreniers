@@ -4,8 +4,8 @@ from datetime import date, datetime
 
 def generate_calendar(year: int, month: int, day: int):
     cal = calendar.Calendar(6)
-    calendar_format = "CALENDAR\n\n_____________________________\n\n" + calendar.month_name[month] + " - " + str(year) \
-                      + "\n\n<b> SU  MO  TU  WE  TH  FR  SA</b>\n\n"
+    calendar_format = "<b>CALENDAR</b>\n\n_____________________________\n\n<b>" + calendar.month_name[month] + "</b> - <b>" + str(year) \
+                      + "</b>\n\n<b> SU  MO  TU  WE  TH  FR  SA</b>\n\n"
 
     current_week = 0
     for row in cal.itermonthdates(year, month):
@@ -51,12 +51,13 @@ def generate_progress_bar(progress: int, max: int = 61, step: int = 10, top_bar:
     progress_bar = ""
     if top_bar:
         progress_bar += "/" + generate_bar(max=max, step=step) + "\\ \n\n"
-    progress_bar += "| "
-    for _ in range(progress):
+    progress_bar += "|"
+    for _ in range(progress-1):
         progress_bar += 'O'
+    progress_bar += " <b>" + str(progress) + "</b>"
     for _ in range(max - progress):
         progress_bar += ' '
-    progress_bar += " |\n\n"
+    progress_bar += "|\n\n"
     if bottom_bar:
         progress_bar += "\\" + generate_bar(c="_", max=max, step=step) + "/\n\n"
     return progress_bar
@@ -102,7 +103,7 @@ if __name__ == '__main__':
     print(generated_calendar)
 
     content = "**Frederic Desgreniers**\n\n" + wrap_in_ticks(join_blocks(generated_calendar,
-                                                                         "CLOCK (UTC)\n\n_______________________________\n\n"
+                                                                         "<b>CLOCK</b> (UTC)\n\n_______________________________\n\n"
                                                                          + generate_progress_bar(datetime.now().hour,
                                                                                                  max=25, step=6,
                                                                                                  bottom_bar=False)
