@@ -4,7 +4,7 @@ from datetime import date, datetime
 
 def generate_calendar(year: int, month: int, day: int):
     cal = calendar.Calendar(6)
-    content = calendar.month_name[month] + " - " + str(year) + "\n\n"
+    calendar_format = calendar.month_name[month] + " - " + str(year) + "\n\n"
 
     current_week = 0
     for row in cal.itermonthdates(year, month):
@@ -12,20 +12,20 @@ def generate_calendar(year: int, month: int, day: int):
         if day_of_week == 0:
             current_week += 1
             if current_week > 1:
-                content += "\n\n"
+                calendar_format += "\n\n"
         is_today = row.month == month and row.day == day
         if is_today:
-            content += "["
+            calendar_format += "["
         else:
-            content += " "
+            calendar_format += " "
         if row.day < 10:
-            content += " "
-        content += str(row.day)
+            calendar_format += " "
+        calendar_format += str(row.day)
         if is_today:
-            content += "]"
+            calendar_format += "]"
         else:
-            content += " "
-    return content
+            calendar_format += " "
+    return calendar_format
 
 
 def generate_bar(c: str = '‾', max: int = 61, step: int = 10):
@@ -46,16 +46,19 @@ def generate_bar(c: str = '‾', max: int = 61, step: int = 10):
     return bar
 
 
-def generate_progress_bar(progress: int, max: int = 61, step: int = 10):
-    content = "/" + generate_bar(max=max, step=step) + "\\ \n\n"
-    content += "| "
+def generate_progress_bar(progress: int, max: int = 61, step: int = 10, top_bar: bool = True, bottom_bar: bool = True):
+    progress_bar = ""
+    if top_bar:
+        progress_bar += "/" + generate_bar(max=max, step=step) + "\\ \n\n"
+    progress_bar += "| "
     for _ in range(progress):
-        content += 'O'
-    for _ in range(max-progress):
-        content += ' '
-    content += " |\n\n"
-    content += "\\" + generate_bar(c="_", max=max, step=step) + "/\n\n"
-    return content
+        progress_bar += 'O'
+    for _ in range(max - progress):
+        progress_bar += ' '
+    progress_bar += " |\n\n"
+    if bottom_bar:
+        progress_bar += "\\" + generate_bar(c="_", max=max, step=step) + "/\n\n"
+    return progress_bar
 
 
 def join_blocks(left: str, right: str, delimiter="  |  "):
@@ -63,24 +66,24 @@ def join_blocks(left: str, right: str, delimiter="  |  "):
     left_lines = left.split('\n\n')
     right_lines = right.split('\n\n')
 
-    content = ""
+    block = ""
     for i, line in enumerate(left_lines):
         while len(line) < left_width:
             line += " "
-        content += line
+        block += line
         if len(right_lines) > i:
-            content += delimiter + right_lines[i] + "\n\n"
+            block += delimiter + right_lines[i] + "\n\n"
         else:
-            content += "\n\n"
+            block += "\n\n"
     if len(left_lines) < len(right_lines):
         padding = ''
         for _ in range(left_width):
             padding += ' '
         for i, line in enumerate(right_lines):
             if i >= len(left_lines):
-                content += padding + delimiter + line + "\n\n"
+                block += padding + delimiter + line + "\n\n"
 
-    return content
+    return block
 
 
 def wrap_in_ticks(content: str):
@@ -96,8 +99,8 @@ if __name__ == '__main__':
     print(generated_calendar)
 
     content = wrap_in_ticks(join_blocks(generated_calendar,
-                                        "hour\n\n" + generate_progress_bar(datetime.now().hour, max=25, step=6)
-                                        +"\n\nminute\n\n" + generate_progress_bar(50)
+                                        generate_progress_bar(datetime.now().hour, max=25, step=6, bottom_bar=False)
+                                        + generate_progress_bar(50, top_bar=False) + "\n\nminute"
                                         )
                             )
     print(content)
