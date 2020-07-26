@@ -45,7 +45,9 @@ def join_blocks(left: str, right: str, delimiter = " | "):
 
     content = ""
     for i, line in enumerate(left_lines):
-        content += line.ljust(left_width)
+        while len(line) < left_width:
+            line += " "
+        content += line
         if len(right_lines) > i:
             content += delimiter + right_lines[i] + "\n\n"
         else:
