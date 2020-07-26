@@ -152,9 +152,9 @@ if __name__ == '__main__':
                                                                                                  max=25, step=6,
                                                                                                  bottom_bar=False)
                                                                          + generate_progress_bar(datetime.now().minute,
-                                                                                                 top_bar=False)
+                                                                                                 top_bar=False) + "\n\n\n\n"
                                                                          ) +
-                                                             "------------------------------------------------------\n\n" +
+                                                             "------------------------------------------------------------------\n\n" +
 
                                                              book_list()
     )
