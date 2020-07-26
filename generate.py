@@ -102,7 +102,7 @@ def book_list():
            renderBook("The Spy And The Traitor", "https://www.goodreads.com/book/show/37542581-the-spy-and-the-traitor",
                       "Story of Oleg Gordievsky, a real soviet era spy turned double agent for MI6.") + \
            renderBook("Manufacturing Consent", "https://www.goodreads.com/book/show/12617.Manufacturing_Consent",
-                      "Classic Chomskey novel relating the politics and media. Regardless of ones opinion, it presents a lot of useful context and example relating to how media will shape the view of political events.") + \
+                      "Classic Chomskey novel relating the politics and media. Regardless of ones opinion of Chomskey, it presents a lot of useful context and example relating to how media will shape the view of political events.") + \
            renderBook("The Elegant Universe", "https://www.goodreads.com/book/show/8049273-the-elegant-universe",
                       "Brian Greene tries his hand at explaining string theory to the layman and he succeeds. Much of the material is up for debate, however it offers a lot of interesting knowledge relating to both the universe and the mathematics behind multi-demensional universes.") + \
            renderBook("The Little Typer", "https://www.goodreads.com/book/show/39736150-the-little-typer",
