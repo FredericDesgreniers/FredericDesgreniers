@@ -127,7 +127,7 @@ def book_list():
            renderBook("The Code Book", "https://www.goodreads.com/book/show/17994.The_Code_Book",
                       "Cool history of the evolution of criptography through the ages and how different types of codes work and are broken. The part on the enigma machine is especially interesting.") + \
            renderBook("The Ride Of A Lifetime", "https://www.goodreads.com/book/show/44525305-the-ride-of-a-lifetime",
-                      "Autobiography from former Disney CEO Robert Iger. Through written before his retirement, it offers an insight into how to rise in complex organization using strong relationships and motivation.") + \
+                      "Autobiography from former Disney CEO Robert Iger. Through written before his retirement, it offers an insight into how to rise in a complex organization using strong relationships and motivation.") + \
            renderBook("Flash Boys", "https://www.goodreads.com/book/show/24724602-flash-boys",
                       "Story of how high frequency trading started and evolved along with the consequences of it.") + \
            renderBook("Compilers - Principles, Techniques & Tools",
