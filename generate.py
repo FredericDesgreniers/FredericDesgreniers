@@ -1,10 +1,10 @@
 import calendar
 from datetime import date, datetime
-
+import sys
 
 def generate_calendar(year: int, month: int, day: int):
     cal = calendar.Calendar(6)
-    calendar_format = calendar.month_name[month] + " - " + str(year) + "\n\n"
+    calendar_format = "CALENDAR\n\n-----------------------------\n\n" + calendar.month_name[month] + " - " + str(year) + "\n\n"
 
     current_week = 0
     for row in cal.itermonthdates(year, month):
@@ -92,14 +92,14 @@ def wrap_in_ticks(content: str):
         new_content += '``' + line + '``\n\n'
     return new_content
 
-
 if __name__ == '__main__':
     today = date.today()
     generated_calendar = generate_calendar(today.year, today.month, today.day)
     print(generated_calendar)
 
-    content = wrap_in_ticks(join_blocks(generated_calendar,
-                                        generate_progress_bar(datetime.now().hour, max=25, step=6, bottom_bar=False)
+    content = "**Frederic Desgreniers**\n\n" + wrap_in_ticks(join_blocks(generated_calendar,
+                                        "CLOCK (UTC)\n\n-------------------------------\n\n"
+                                        + generate_progress_bar(datetime.now().hour, max=25, step=6, bottom_bar=False)
                                         + generate_progress_bar(datetime.now().minute, top_bar=False)
                                         )
                             )
