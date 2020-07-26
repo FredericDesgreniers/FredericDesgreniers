@@ -5,9 +5,8 @@ name: CI
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  issues:
-    types: [opened, edited]
-
+  schedule:
+    - cron: '0 * * *'
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -25,7 +24,7 @@ jobs:
         python-version: '3.x'
     
     - name: update readlist
-      run: python notes.py
+      run: python generate.py
     
     - name: push
       uses: EndBug/add-and-commit@v4
