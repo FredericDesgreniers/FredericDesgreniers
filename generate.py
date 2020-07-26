@@ -34,7 +34,7 @@ def generate_bar(progress: int, c: str = '‾', max: int = 61, step: int = 10):
     bar = "<b><i>"
     current = 0
     until_step = 0
-    while current < progress:
+    while current <= progress:
         if until_step == 0:
             bar += str(current)
             if current < 10:
