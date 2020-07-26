@@ -10,7 +10,7 @@ _____________________________  |  _______________________________
 
 <b> SU  MO  TU  WE  TH  FR  SA</b>    |  |OOOOOOOOOOOOOOO <b>16</b>         |
 
- 28  29  30   1   2   3   4    |  |OOOOOOOOO <b>10</b>                                                   |
+ 28  29  30   1   2   3   4    |  |OOOOOOOOOOOOOOO <b>16</b>                                             |
 
   5   6   7   8   9  10  11    |  \0_________10________20________30________40________50________60/
 
@@ -22,6 +22,10 @@ _____________________________  |  _______________________________
 
 ------------------------------------------------------
 
+<b><a href="https://github.com/FredericDesgreniers/FredericDesgreniers/issues/new?labels=book&title=[book%20name%20goes%20here]&body=[Any%20related%20comment%20goes%20here]">Send me a book suggestion!</a></b>
+
+
+
 <b>Book List</b> (Some of my favorite books read in the last 2-3 years)
 
 <b><a href="https://www.goodreads.com/book/show/37542581-the-spy-and-the-traitor">The Spy And The Traitor</a></b>:
@@ -30,7 +34,7 @@ _____________________________  |  _______________________________
 
 <b><a href="https://www.goodreads.com/book/show/12617.Manufacturing_Consent">Manufacturing Consent</a></b>:
 
-    <i>Classic Chomskey novel relating the politics and media. Regardless of ones opinion, it presents a lot of useful context and example relating to how media will shape the view of political events.</i>
+    <i>Classic Chomskey novel relating the politics and media. Regardless of ones opinion of Chomskey, it presents a lot of useful context and example relating to how media will shape the view of political events.</i>
 
 <b><a href="https://www.goodreads.com/book/show/8049273-the-elegant-universe">The Elegant Universe</a></b>:
 
