@@ -91,7 +91,7 @@ def join_blocks(left: str, right: str, delimiter="  |  "):
 
 
 def renderBook(title: str, link: str, description) -> str:
-    return f"<b><a href=\"{link}\">{title}</a></b>: <i>" + description + "</i>\n\n"
+    return f"<b><a href=\"{link}\">{title}</a></b>:\n\n    <i>" + description + "</i>\n\n"
 
 
 def book_list():
