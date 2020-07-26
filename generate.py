@@ -30,10 +30,22 @@ def generate_calendar(year: int, month: int, day: int):
     return calendar_format
 
 
-def generate_bar(c: str = '‾', max: int = 61, step: int = 10):
-    bar = ""
+def generate_bar(progress: int, c: str = '‾', max: int = 61, step: int = 10):
+    bar = "<b><i>"
     current = 0
     until_step = 0
+    while current < progress:
+        if until_step == 0:
+            bar += str(current)
+            if current < 10:
+                bar += c
+            current += 1
+            until_step = step - 1
+        else:
+            bar += c
+        until_step -= 1
+        current += 1
+    bar += "</i></b>"
     while current < max:
         if until_step == 0:
             bar += str(current)
@@ -51,7 +63,7 @@ def generate_bar(c: str = '‾', max: int = 61, step: int = 10):
 def generate_progress_bar(progress: int, max: int = 61, step: int = 10, top_bar: bool = True, bottom_bar: bool = True):
     progress_bar = ""
     if top_bar:
-        progress_bar += "/" + generate_bar(max=max, step=step) + "\\ \n\n"
+        progress_bar += "/" + generate_bar(progress, max=max, step=step) + "\\ \n\n"
     progress_bar += "|"
     for _ in range(progress - 1):
         progress_bar += 'O'
@@ -60,7 +72,7 @@ def generate_progress_bar(progress: int, max: int = 61, step: int = 10, top_bar:
         progress_bar += ' '
     progress_bar += "|\n\n"
     if bottom_bar:
-        progress_bar += "\\" + generate_bar(c="_", max=max, step=step) + "/\n\n"
+        progress_bar += "\\" + generate_bar(progress, c="_", max=max, step=step) + "/\n\n"
     return progress_bar
 
 
