@@ -58,7 +58,7 @@ def generate_progress_bar(progress: int, max: int = 61, step: int = 10):
     return content
 
 
-def join_blocks(left: str, right: str, delimiter=" | "):
+def join_blocks(left: str, right: str, delimiter="  |  "):
     left_width = max([len(x) for x in left.split("\n\n")])
     left_lines = left.split('\n\n')
     right_lines = right.split('\n\n')
