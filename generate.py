@@ -131,7 +131,7 @@ if __name__ == '__main__':
     generated_calendar = generate_calendar(today.year, today.month, today.day)
     print(generated_calendar)
 
-    content = "**Frederic Desgreniers**\n\n" + wrap_in_ticks(join_blocks(generated_calendar,
+    content = wrap_in_ticks(join_blocks(generated_calendar,
                                                                          "<b>CLOCK</b> (UTC)\n\n_______________________________\n\n"
                                                                          + generate_progress_bar(datetime.now().hour,
                                                                                                  max=25, step=6,
