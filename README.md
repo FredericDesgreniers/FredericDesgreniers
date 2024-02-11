@@ -1,1 +1,1 @@
-404
+https://frde.me
